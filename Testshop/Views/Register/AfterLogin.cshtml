@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Testshop.Models.User>
 @{
     ViewBag.Title = "AfterLogin";
 }
@@ -8,6 +8,12 @@
 {
     <div>
         <h2>Welcome : <a href="#">@Session["UserName"]</a></h2><br />
+        <div class="thumbnail">
+            <img class="img-responsive" src="~/Images/Profile/@Session["UserImg"]" height="100" width="100"/>
+        </div>
+        <div>
+            <h1><a href="/Register/Data">Show DATA</a></h1>
+        </div>
         <a href="/Register/Logout">Logout</a>
     </div>
 }

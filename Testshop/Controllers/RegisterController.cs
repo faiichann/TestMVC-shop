@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Testshop.Models;
 using System.IO;
+using System.Dynamic;
+using Newtonsoft.Json;
 
 namespace Testshop.Controllers
 {
@@ -20,6 +22,11 @@ namespace Testshop.Controllers
         public JsonResult SaveData(User user)
         {
             user.IsValid = false;
+            //string filename = Path.GetFileNameWithoutExtension(user.ImgUrl.FileName);
+            //string extension = Path.GetExtension(user.ImgUrl.FileName);
+            //filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+            //user.UserImg = filename;
+            //user.ImgUrl.SaveAs(Path.Combine(Server.MapPath("~/Images/Profile"), filename));
             db.Users.Add(user);
             db.SaveChanges();
             return Json("Register Successfull", JsonRequestBehavior.AllowGet);
@@ -33,6 +40,7 @@ namespace Testshop.Controllers
             {
                 Session["UserID"] = DataItem.IDuser.ToString();
                 Session["UserName"] = DataItem.UserName.ToString();
+                Session["UserImg"] = DataItem.UserImg.ToString();
                 result = "Success";
             }
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -54,6 +62,27 @@ namespace Testshop.Controllers
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Index");
+        }
+        public ActionResult Data()
+        {
+
+            if (Session["UserID"] != null)
+            {
+                List<DataPoint> dataPoints = new List<DataPoint>{
+                new DataPoint(10, 22),
+                new DataPoint(20, 36),
+                new DataPoint(30, 42),
+                new DataPoint(40, 51),
+                new DataPoint(50, 46),
+            };
+
+                ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

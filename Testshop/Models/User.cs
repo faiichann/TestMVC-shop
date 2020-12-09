@@ -11,6 +11,7 @@ namespace Testshop.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Web;
     
     public partial class User
     {
@@ -22,5 +23,6 @@ namespace Testshop.Models
         public string UserPhone { get; set; }
         public string UserImg { get; set; }
         public Nullable<bool> IsValid { get; set; }
+        public HttpPostedFileBase ImgUrl { get; set; }
     }
 }
