@@ -12,7 +12,7 @@ namespace Testshop.Controllers
 {
     public class RegisterController : Controller
     {
-        TestShopEntities db = new TestShopEntities();
+        TestShopEntities1 db = new TestShopEntities1();
         // GET: Register
         public ActionResult Index()
         {

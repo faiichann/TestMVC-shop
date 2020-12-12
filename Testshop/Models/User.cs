@@ -23,6 +23,6 @@ namespace Testshop.Models
         public string UserPhone { get; set; }
         public string UserImg { get; set; }
         public Nullable<bool> IsValid { get; set; }
-        public HttpPostedFileBase ImgUrl { get; set; }
+        //public HttpPostedFileBase ImgUrl { get; set; }
     }
 }

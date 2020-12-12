@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Testshop.ViewModel.ShoppingModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Shopping</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>ItemId</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(@product.Image)"
+                         class="rounded-circle"
+                         height="60" width="60"
+                         asp-append-version="true" />
+                </td>
+                <td>@product.Name</td>
+                <td>@product.ItemId</td>
+                <td>@product.Description</td>
+                <td>
+                    <div class="row">
+                        <div class="col-2">
+                            @product.Price
+                        </div>
+                        <div class="col-3">
+                            <input type="button" name="AddtoCart" value="Add to Cart" itemid="@product.ItemId" id="btnAddCart" class="btn btn-primary" onclick="AddToCart(this)" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+
+    function AddToCart(item) {
+        var itemId = $(item).attr("itemid");
+        var formData = new FormData();
+        formData.append("ItemId", itemId);
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/Shop/Index',
+            success: function (data) {
+                if (data.Success) {
+                    $("#cartitem").text("Cart(" + data.Counter + ")");
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+
+        });
+
+    }
+</script>
+

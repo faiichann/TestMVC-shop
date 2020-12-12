@@ -26,7 +26,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="User">
+        <EntityType Name="Users">
           <Key>
             <PropertyRef Name="IDuser" />
           </Key>
@@ -40,7 +40,7 @@
           <Property Name="IsValid" Type="Boolean" />
         </EntityType>
         <EntityContainer Name="TestShopEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Users1" EntityType="TestShopModel.Users" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -48,8 +48,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TestShopModelStoreContainer" CdmEntityContainer="TestShopEntities">
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="TestShopModel.User">
+          <EntitySetMapping Name="Users1">
+            <EntityTypeMapping TypeName="TestShopModel.Users">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="IDuser" ColumnName="IDuser" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
